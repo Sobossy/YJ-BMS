@@ -34,7 +34,7 @@ import searchConfig from './config/search.config'
 import contentConfig from './config/content.config'
 import modalConfig from './config/modal.config'
 import useMainStore from '@/store/main/main'
-import userPageContent from '@/hooks/usePageContent'
+import usePageContent from '@/hooks/usePageContent'
 import usePageModal from '@/hooks/usePageModal'
 
 // 对modalConfig进行操作
@@ -53,7 +53,7 @@ const modalConfigRef = computed(() => {
 })
 
 // 点击search，content的操作
-const { contentRef, handleQueryClick, handleResetClick } = userPageContent()
+const { contentRef, handleQueryClick, handleResetClick } = usePageContent()
 
 // 点击content，modal的操作
 const { modalRef, handleNewClick, handleEditClick } = usePageModal()

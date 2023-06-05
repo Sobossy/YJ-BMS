@@ -59,8 +59,15 @@
               </template>
             </el-table-column>
           </template>
+          <template v-else-if="item.type === 'pic'">
+            <el-table-column align="center" v-bind="item">
+              <template #default="scope">
+                <el-image :src="scope.row.imgUrl" alt="" />
+              </template>
+            </el-table-column>
+          </template>
           <template v-else>
-            <el-table-column align="center" v-bind="item" />
+            <el-table-column align="center" v-bind="item"> </el-table-column>
           </template>
         </template>
       </el-table>
@@ -101,6 +108,7 @@ interface IProps {
 const props = defineProps<IProps>()
 
 const emit = defineEmits(['newClick', 'editClick'])
+// console.log(props.contentConfig.propsList)
 
 // 获取是否有对应增删改查的权限
 const isCreate = usePermissions(`${props.contentConfig.pageName}:create`)
@@ -144,7 +152,6 @@ function fetchPageListData(formData: any = {}) {
   const size = pageSize.value
   const offset = (currentPage.value - 1) * size
   const pageInfo = { size, offset }
-  // console.log(pageInfo)
 
   const queryInfo = { ...pageInfo, ...formData }
   systemStore.postPageListAction(props.contentConfig.pageName, queryInfo)
